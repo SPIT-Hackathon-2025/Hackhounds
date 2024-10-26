@@ -88,6 +88,7 @@ app.post('/donate', async (req, res) => {
         console.error('Error processing donation:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
+  });
 // Sign Up Route with bcrypt password hashing
 app.post('/api/signup', async (req, res) => {
   const { username, password } = req.body;
