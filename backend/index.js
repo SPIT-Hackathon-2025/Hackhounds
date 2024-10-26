@@ -76,6 +76,7 @@ app.post('/api/login', async (req, res) => {
 
     // Save user ID in session on successful login
     req.session.userId = user._id;
+    console.log(req.session.userId);
     res.status(200).json({ message: 'Login successful!' });
   } catch (error) {
     console.error('Error logging in:', error);
