@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 const upload = multer(); 
 app.use(express.json());
 
-const User = require('./models/User'); // Assuming User model is defined as shown before
+const User = require('./models/User_model.js'); // Assuming User model is defined as shown before
 
 
 
@@ -91,18 +91,26 @@ app.post('/donate', async (req, res) => {
   });
 // Sign Up Route with bcrypt password hashing
 app.post('/api/signup', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, role, email_id, team_id } = req.body;
 
   try {
-    // Check if user already exists
-    const existingUser = await User.findOne({ username });
+    // Check if user already exists by username or email
+    const existingUser = await User.findOne({ $or: [{ username }, { email_id }] });
     if (existingUser) {
-      return res.status(400).json({ error: 'Username already taken' });
+      return res.status(400).json({ error: 'Username or Email ID already taken' });
     }
 
     // Hash the password before saving
     const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
-    const newUser = new User({ username, password: hashedPassword });
+
+    // Create and save new user
+    const newUser = new User({
+      username,
+      password: hashedPassword,
+      role,
+      email_id,
+      team_id: role === 'team_leader' || role === 'player' ? team_id : null
+    });
     await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully!' });
@@ -114,13 +122,18 @@ app.post('/api/signup', async (req, res) => {
 
 // Login Route with bcrypt password comparison
 app.post('/api/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, role, team_id } = req.body;
 
   try {
-    // Find the user by username
-    const user = await User.findOne({ username });
+    // Find the user by username and role
+    const user = await User.findOne({ username, role });
     if (!user) {
-      return res.status(400).json({ error: 'Invalid username or password' });
+      return res.status(400).json({ error: 'Invalid username, role, or password' });
+    }
+
+    // If role is player or team leader, ensure the team_id matches
+    if ((role === 'player' || role === 'team_leader') && user.team_id !== team_id) {
+      return res.status(400).json({ error: 'Invalid team ID' });
     }
 
     // Compare provided password with hashed password in DB
@@ -131,13 +144,12 @@ app.post('/api/login', async (req, res) => {
 
     // Save user ID in session on successful login
     req.session.userId = user._id;
-    console.log(req.session.userId);
+    console.log('Logged in user ID:', req.session.userId);
     res.status(200).json({ message: 'Login successful!' });
   } catch (error) {
     console.error('Error logging in:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
-
 });
 
 // Logout Route
