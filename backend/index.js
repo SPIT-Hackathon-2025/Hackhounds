@@ -91,7 +91,7 @@ app.post('/donate', async (req, res) => {
   });
 // Sign Up Route with bcrypt password hashing
 app.post('/api/signup', async (req, res) => {
-  const { username, password, role, email_id, team_id } = req.body;
+  const { username, password,  email_id} = req.body;
 
   try {
     // Check if user already exists by username or email
@@ -107,9 +107,8 @@ app.post('/api/signup', async (req, res) => {
     const newUser = new User({
       username,
       password: hashedPassword,
-      role,
       email_id,
-      team_id: role === 'team_leader' || role === 'player' ? team_id : null
+     
     });
     await newUser.save();
 
@@ -122,19 +121,17 @@ app.post('/api/signup', async (req, res) => {
 
 // Login Route with bcrypt password comparison
 app.post('/api/login', async (req, res) => {
-  const { username, password, role, team_id } = req.body;
+  const { username, password } = req.body;
 
   try {
     // Find the user by username and role
-    const user = await User.findOne({ username, role });
+    const user = await User.findOne({ username});
     if (!user) {
       return res.status(400).json({ error: 'Invalid username, role, or password' });
     }
 
     // If role is player or team leader, ensure the team_id matches
-    if ((role === 'player' || role === 'team_leader') && user.team_id !== team_id) {
-      return res.status(400).json({ error: 'Invalid team ID' });
-    }
+   
 
     // Compare provided password with hashed password in DB
     const isPasswordValid = await bcrypt.compare(password, user.password);

@@ -27,7 +27,7 @@ const userDataSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: ['judge', 'admin', 'team_leader', 'player'],
-        required: true
+        required: false
     }
 }, {
     timestamps: true // Adds createdAt and updatedAt timestamps
