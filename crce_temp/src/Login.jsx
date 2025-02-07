@@ -30,7 +30,7 @@ const Login = () => {
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2">Role:</label>
             <select
               value={role}
@@ -44,7 +44,7 @@ const Login = () => {
               <option value="team_leader">Team Leader</option>
               <option value="player">Player</option>
             </select>
-          </div>
+          </div> */}
 
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2">Username:</label>
