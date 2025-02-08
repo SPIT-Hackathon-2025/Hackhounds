@@ -15,7 +15,7 @@ export default function Header() {
       <nav className="flex gap-6 text-lg">
         <Link to="/page1" className="hover:text-red-500">Page 1</Link>
         <Link to="/page2" className="hover:text-red-500">Page 2</Link>
-        <Link to="/page3" className="hover:text-red-500">Page 3</Link>
+        <Link to="/purchase" className="hover:text-red-500">Purchase</Link>
       </nav>
 
       {/* Profile & Menu */}
