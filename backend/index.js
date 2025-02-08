@@ -120,7 +120,6 @@ app.post('/donate', async (req, res) => {
   }
 });
 
-
 // Google OAuth routes
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
@@ -133,28 +132,14 @@ app.get(
 );
 
 app.post('/auth/google', async (req, res) => {
-  // const { googleId, username, email} = req.body;
-  // console.log(req.body);
   try {
-//     // Check if user already exists
-//     let user = await User.findOne({ googleId });
-// console.log(user);
-//     if (!user) {
-//       // Create a new user if not found
-//       user = new User({
-//         googleId: googleId,
-//         username: username,
-//         email: email, // This is optional
-//       });
-//       await user.save();
-//     }
-
     res.status(200).json({ message: 'Google login successful', redirectUrl: '/dashboard' });
   } catch (error) {
     console.error('Error during user signup:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
 app.post('/api/save', async (req, res) => {
   try {
     const workflow = new Workflow(req.body);
@@ -165,13 +150,40 @@ app.post('/api/save', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+// Get all workflows
+app.get('/get-workflows', async (req, res) => {
+  try {
+    console.log("Reached Here");
+    const workflows = await Workflow.find();
+    res.status(200).json(workflows);
+  } catch (error) {
+    console.error('Error fetching workflows:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Get a specific workflow by ID
+app.get('/api/workflows/:id', async (req, res) => {
+  try {
+    const workflow = await Workflow.findById(req.params.id);
+    if (!workflow) {
+      return res.status(404).json({ message: 'Workflow not found' });
+    }
+    res.status(200).json(workflow);
+  } catch (error) {
+    console.error('Error fetching workflow:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 // Webhook route
 app.post('/webhook/site1', async (req, res) => {
   console.log('Webhook received:', req.body);
 
   try {
     const workflow = await Workflow.findOne({ trigger: "orderplaced" });
-console.log(workflow);
+    console.log(workflow);
     if (workflow && workflow.slack && workflow.slack.length > 0) {
       for (const slack of workflow.slack) {
         console.log(slack);
