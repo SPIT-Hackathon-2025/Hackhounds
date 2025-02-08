@@ -15,6 +15,7 @@ import {Route, Routes} from "react-router-dom";
 import FileUpload from './Pages/Drive';
 import EmailForm from './Pages/Email';
 import Task from './Pages/Task';
+import TemplateDashboard from './Pages/Template';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/profile" element={<Profiles/>}/>
           <Route path="/workflow/:id" element={<WorkFlowMaker />} />
            <Route path="/login" element={<Login/>} />
+           <Route path="/template" element={<TemplateDashboard/>} />
            <Route path="/signup" element={<SignUp/>} />
           <Route path="/streamlit" element={<StreamlitEmbed />} />
           <Route path="/pay" element={<RazorpayPayment />} />
