@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "root-furnace-383816",
+    "private_key_id": "590d156b02325c1810be7b23a3eadb7ad8a7f068",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDS1UveLrZ0x1qx\n3K+MOrXqLp0k0cpotU6vp5H0tGeDUGJ74EfQGwXTLkZHwaZS7fivW664vx9/Helc\nzZFSkjK1LM8hQtHu54R/9SBnB1XDqdZbAbOzKKQNjHS6dddXBHPs8UhqCBu3EUSQ\n5TzCeJvGxtKR+icKpafPHNTu0SrkSH2KMHTMDisFyupHsPkEt2bC+Py1kuwlf7zj\nFvPY0xTIn+RWQ6OjUMlW6c6a1OIHtOfMF5k/lKQrATdaGyW6201qwd1sBVVoGLV2\nlNWrLa1oP4jEj0RpFlAAhI80Ep8/oaYZ5DOW4UF5C+vmaid/dvZJOA00W0MaDyUp\nX1HrIDr1AgMBAAECggEAMV8XlCEWQwSIHYyTY2BAR2XBEOU75AdJNOMlz8sLTnnd\nhirARmB9nbWBab5UZ6koilAK+2JuSsNDaaMN++sWiszCeISAStTWd2x8uQPDtr0n\n4EnmvfavbCjPEPcVhWAakYrzLTlW3CjkCJZWAyhhOkxG9T5CNEEUqfCTgJVk2O4f\n7oEl0SyjskgulGciIoN1ZwTDuQfTSYuzOPknAMk9u4j9rf8tsYDY3NDbbv9FuOZY\nLQLu6ryiS1pDjeMYoonJmC/SNH4/oSgV/YRTHlLDEfA+66nkmm9eYGz9ZXOVTowj\naTuucHKXkTTc0tuMxa6se0aDkitfEi7QWUuYcwA/AQKBgQDw61wThvVPq4ydeHxB\nphy60OlbxzspaC6zpc+vmnyScHp0Da++VLaIeNt0JcCr8OorALomMo7QUP5nnZG5\nqhylsxR2dQq/OjlNuQqDbC7w21YdFu4/+i7C/xGN6So8t51/zHOhggXDuBoW6Fzq\nyspBtcKQB4Vl8gbA1cKf/at+QQKBgQDgB9EwRegmryrRtk5pk4W9GiRmiPbsZuTD\n1gjlw7rm8ypW1C57UpjQD5YDlhQVH/tgnEX7Ek0ncHIXLYFBq0B2eesMP9mBsDzd\nfyYgOe0U6d5Y0FP/aCY0/A4jqhJsq8oAR+IsF88yfkw5g/V03bf2UNpG3icyBNrc\ndbVjCMA3tQKBgQC0obKijXCF8Hh4ZKq9Sf+GbjZY8rK/4/YICc0Cu5Ck9yJIuy5G\nRRuqjPr1RY0FHZdk8KGhHA0J0YA9Td3B1/Kspe00t6J8J/po9NEWIlm7iqgxHU06\nuKiw2S9fOC/L4Ft9Q1x6/pK14OXmwQdRnwQwakfbV1hETEeV829+J2KaQQKBgD/I\nmft3e9A/wR4yHIMcmFAtuD1lM4A9D1begmwAXR9SDjTodk9wRce/GEPvH8qf728j\nLx17qXHYJvOIZiuvOUxCC/TR3Ph6l+msQMueEm0I5OA+eBvYqEAfn1ryGgrMoleQ\nH8nUAY7rvIIHmwPp+G1tuafBqkEodrOb48fNfwSdAoGAFx01Eul7/dnea9i61guz\n5Bhyl6pq+k6Sp0KOP+JtCJIOUfFtwxVK+Dg62fOCkNsATJUBk+l309SuHB4AVsVa\nLjrKaoK6g1Ej04vL8oRMMmtuuyVb3ZWlZ0Qrvaukfa5xdDU/Tsa+2UunA6YLmjnb\n/cW0wqGlCXgLFLpiitL2g5M=\n-----END PRIVATE KEY-----\n",
+    "client_email": "spitdrive@root-furnace-383816.iam.gserviceaccount.com",
+    "client_id": "117743567657558391966",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/spitdrive%40root-furnace-383816.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }
