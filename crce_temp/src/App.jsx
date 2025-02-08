@@ -9,9 +9,12 @@ import Login from './Login';
 import Page1 from './Pages/Page1';
 import Page2 from './Pages/Page2';
 import Purchase from './Pages/Purchase';
+import Profiles from './Pages/Profiles';
+import WorkFlowMaker from './Pages/WorkFlowMaker';
 import {Route, Routes} from "react-router-dom";
 import FileUpload from './Pages/Drive';
 import EmailForm from './Pages/Email';
+import Task from './Pages/Task';
 
 function App() {
   return (
@@ -21,6 +24,8 @@ function App() {
           <Route path="/page1" element={<Page1/>}/>
           <Route path="/page2" element={<Page2/>}/>
           <Route path="/purchase" element={<Purchase/>}/>
+          <Route path="/profile" element={<Profiles/>}/>
+          <Route path="/workflow/:id" element={<WorkFlowMaker />} />
            <Route path="/login" element={<Login/>} />
            <Route path="/signup" element={<SignUp/>} />
           <Route path="/streamlit" element={<StreamlitEmbed />} />
@@ -28,6 +33,7 @@ function App() {
           <Route path="/test" element={<FileUpload/>} />
           <Route path="/email" element={<EmailForm/>} />
           <Route path="*" element={<h1>Not Found</h1>} />
+          <Route path="/tasks" element={<Task />} />
         </Route>
     </Routes>
 

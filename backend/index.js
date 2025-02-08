@@ -158,6 +158,32 @@ app.post('/api/save', async (req, res) => {
   }
 });
 
+// Get all workflows
+app.get('/get-workflows', async (req, res) => {
+  try {
+    console.log("Reached Here");
+    const workflows = await Workflow.find();
+    res.status(200).json(workflows);
+  } catch (error) {
+    console.error('Error fetching workflows:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Get a specific workflow by ID
+app.get('/api/workflows/:id', async (req, res) => {
+  try {
+    const workflow = await Workflow.findById(req.params.id);
+    if (!workflow) {
+      return res.status(404).json({ message: 'Workflow not found' });
+    }
+    res.status(200).json(workflow);
+  } catch (error) {
+    console.error('Error fetching workflow:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 // Webhook route
 const upload = multer({ dest: "uploads/" });
 const driveAuth = new google.auth.GoogleAuth({
@@ -174,7 +200,7 @@ const driveAuth = new google.auth.GoogleAuth({
   try {
     // 🔍 Find workflow with trigger "orderplaced"
     const workflow = await Workflow.findOne({ trigger: "orderplaced" });
-    console.log(workflow);
+        console.log(workflow);
 
     // 📢 Send messages to Slack if Slack settings exist
     if (workflow && workflow.slack && workflow.slack.length > 0) {
