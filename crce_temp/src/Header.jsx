@@ -1,34 +1,80 @@
+import React from 'react';
 import { Link } from "react-router-dom";
+import { 
+  Send, 
+  Workflow, 
+  LayoutTemplate, 
+  CreditCard, 
+  Sparkles,
+  Menu,
+  User
+} from "lucide-react";
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center py-4 px-6 shadow-md">
-      {/* Logo */}
-      <Link to={'/'} className="flex items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 -rotate-90">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-        </svg>
-        <span className="font-bold text-xl">airbnb</span>
-      </Link>
-
-      {/* Navbar Links */}
-      <nav className="flex gap-6 text-lg">
-        <Link to="/page1" className="hover:text-red-500">Page 1</Link>
-        <Link to="/page2" className="hover:text-red-500">Page 2</Link>
-        <Link to="/purchase" className="hover:text-red-500">Purchase</Link>
-      </nav>
-
-      {/* Profile & Menu */}
-      <div className="flex items-center gap-3 border border-gray-300 rounded-full py-2 px-4 cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-        <Link to="/login" className="bg-gray-500 text-white rounded-full border border-gray-500 overflow-hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 relative top-1">
-            <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
-          </svg>
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+      <div className="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
+        {/* Logo */}
+        <Link 
+          to={'/'} 
+          className="flex items-center gap-2 transition-transform hover:scale-105"
+        >
+          <img src="../src/assets/logo.png" alt="Logo" className="w-8 h-8" />
+          <span className="font-bold text-2 xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            FlowSync
+          </span>
         </Link>
+
+        {/* Navbar Links */}
+        <nav className="hidden md:flex gap-8 text-base font-medium">
+          <Link 
+            to="/page1" 
+            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            <Workflow className="w-4 h-4" />
+            <span>WorkFlows</span>
+          </Link>
+          
+          <Link 
+            to="/templates" 
+            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            <LayoutTemplate className="w-4 h-4" />
+            <span>Templates</span>
+          </Link>
+          
+          <Link 
+            to="/purchase" 
+            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            <CreditCard className="w-4 h-4" />
+            <span>Purchase</span>
+          </Link>
+          
+          <Link 
+            to="/ai-prompt" 
+            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            <Sparkles className="w-4 h-4" />
+            <span>AI Prompt</span>
+          </Link>
+        </nav>
+
+        {/* Profile & Menu */}
+        <div className="flex items-center gap-4">
+          <button className="hidden md:flex items-center gap-3 border border-gray-200 rounded-full py-2 px-4 hover:shadow-md transition-shadow bg-white">
+            <Menu className="w-5 h-5 text-gray-600" />
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full p-1">
+              <User className="w-5 h-5" />
+            </div>
+          </button>
+          
+          {/* Mobile Menu Button */}
+          <button className="md:hidden rounded-full p-2 hover:bg-gray-100">
+            <Menu className="w-6 h-6 text-gray-600" />
+          </button>
+        </div>
       </div>
     </header>
   );
-}
+};
