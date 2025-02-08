@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "root-furnace-383816",
+  "private_key_id": "475d551be5b5f3b171e07206d7104e893baac559",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDe3b9TRpurJSzJ\nUf8cKC1sUnrj+grv6occ8xcbfwu6tbj+n0FNBZxmlHE7TV8xTb43HhkQAiSdr9dJ\ndlwim0E9LldpVSKLhEqPN21wa1jbccjiWfOKGimz+FwRmhYEBIKfSeh6Ib+WMtt1\n2TIlOtCgFw6piy8z3QLPOxtIkwhHWGPsxMvduR736CROd5JgRhGMtHes4uu+Y+/x\nTR5XfjL8FyKG7APvOexXv420S71cd4kq4K2s3Mv+go2t/7yy81llGfv0dX66ajlE\n8Azo3rusC73OA7lP67njNI66AIRP/2gpPSl7CWR2cIhvIeMPuwzvyLWO6402i29D\nPEc4AUmhAgMBAAECggEABrX5Kfiyknb6Wq6OJsAmoVV4z1lrD7newID+ZWIljYVQ\nJn9PpVIsWTdnkyBQ4+hszaE+98kvZpMnVwDfed2gcNyZc7nFTPEFGLu+dHfls1KW\nuLV6Mff4i6uIbtxBBPUeJM3s2D6gvlUA4D3TzCSxqFxsC9q90gs554O8CNWqlmaq\nfXmnnsPKrPlYlCXVKeNyy5XOuxAtXoWohZOOKzYIa+FJOLxx3RJ606Ah7nPzwJhC\nMsR4gdn2KM7wTK4Yv0bncS3icUjLKmuEOuRh9/HiPWnHAVzMdl+aZRbKeTpMK/h+\n3q/Ucfqqp/mm/UpuaWD6HAQ5/3i0NGsCP/N21qY1JQKBgQD4i5adsXMsJ5lPz7tm\nBw8sAxH7GDOpUDyJ8PP6Yfe1jUo1IiesNEeKxaDtojmmZQ0TTooeK+oIao+ALLgp\nyOYmc9HyPZK/WhRa9nCmWcdQ3bvAO6aGQ32TNaYFiIFHiRcxmpK0XXEUOSE5Mrtu\n+Cye4jAkV9MPcj3YAXiB1lU4LQKBgQDljPydAtk8iczL2PsHCO7arf+LYBUiXM9+\nZv5KdqPCDrO0UqjfGGao3LooQlfaz8MWwjWNqBX4zjcfU6FPK93zcUbgUj49+GRQ\nLFKDMkKwT3YmnH9GVWGAJuaI7nWTPyPG+IQ8jxmZOTG8qm1urdWxembew76foXHF\n4FizPOOrxQKBgH6ED5cVzNqdDZ1i0LGOxlpQ9cYq+6EkBqzwykCZvc3crfl9+VPf\nCMvK7bAI8++PYKiDQis5j1fZZlKIcPZUHVNVgXkdfqWI5POono8PBDZVqEyiEJIn\nqLRWirwmUChp0DSfyi2lovn4WsES4fYKviviVz8otXcXYAOkPANbZuXBAoGBAIVT\nszG7AtQvsXzA5WS7oofvQhsAzqWrxHTFe3Nin1DKW0QkMqOJt67irVlO11pnDAf+\n+z3w3/ooREn0uB+U+hA4vhLykeZKjHEonTBIlAV10ckxYpdGZiAZ+BKWdkH1DWG2\n3I+UCik92A6d6nu7if/QeUlv5hsvmTZ2TO6mMhKFAoGAazDc5BsBfA3qYikWWUiu\nFABHSq2PNfeIvee+smTvXTH+i02cKHnK/UUFzMUb0gEbEH9naUU3r3z9Gk6CUmnv\n+KrYuqIARL9r1CKtMxqm+lgIqzl3KHIlxy33XRZ9YDxMWT1hGNFfbuW6+POv8OJP\njPf3f+bkQI/W4knsRPQeyGI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "spit25cal@root-furnace-383816.iam.gserviceaccount.com",
+  "client_id": "104197698619397375364",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/spit25cal%40root-furnace-383816.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
