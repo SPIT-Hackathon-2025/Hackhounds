@@ -10,17 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-
+    "@clerk/clerk-react": "^5.13.1",
+    "@react-oauth/google": "^0.12.1",
     "axios": "^1.7.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
     "route": "^0.2.5",
-    "routes": "^2.1.0",
-
-    "@clerk/clerk-react": "^5.13.1"
-    
-
+    "routes": "^2.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

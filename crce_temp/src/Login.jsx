@@ -1,97 +1,59 @@
-// Login.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+ 
+function decodeJwt(token) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split('')
+      .map((c) => `%${('00' + c.charCodeAt(0).toString(16)).slice(-2)}`)
+      .join('')
+  );
+  return JSON.parse(jsonPayload);
+}
 
-const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState(''); // New state for role
-  const [teamId, setTeamId] = useState(''); // New state for team_id
+function LoginPage() {
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleGoogleLogin = async (credentialResponse) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/login', {
-        username,
-        password,
-        role,
-        team_id: role === 'team_leader' || role === 'player' ? teamId : null
+      const decoded = decodeJwt(credentialResponse.credential);
+      console.log('Decoded Token:', decoded); // Optional for debugging
+
+      const response = await axios.post('http://localhost:3000/auth/google', {
+        token: credentialResponse.credential,
       });
-      setMessage(response.data.message);
+
+      if (response.status === 200) {
+        setMessage('Google Login successful');
+        setTimeout(() => navigate('/dashboard'), 1000);
+      }
     } catch (error) {
-      setMessage(error.response?.data?.error || 'Login failed');
+      console.error(error);
+      setMessage('Google Login failed. Please try again.');
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        <form onSubmit={handleSubmit}>
-          {/* <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">Role:</label>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              required
-              className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-            >
-              <option value="">Select a role</option>
-              <option value="judge">Judge</option>
-              <option value="admin">Admin</option>
-              <option value="team_leader">Team Leader</option>
-              <option value="player">Player</option>
-            </select>
-          </div> */}
-
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">Username:</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-            />
-          </div>
-
-          {role === 'team_leader' || role === 'player' ? (
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Team ID:</label>
-              <input
-                type="text"
-                value={teamId}
-                onChange={(e) => setTeamId(e.target.value)}
-                required
-                className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-              />
-            </div>
-          ) : null}
-
-          <div className="mb-6">
-            <label className="block text-gray-700 font-bold mb-2">Password:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
-          >
-            Login
-          </button>
-        </form>
-        {message && <p className="mt-4 text-center text-gray-700">{message}</p>}
+    <GoogleOAuthProvider clientId="673418593404-2pgmppl2o65k13mnq8e5lgkcr9boegmv.apps.googleusercontent.com">
+      <div className="flex h-screen items-center justify-center bg-gray-100">
+        <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-center text-indigo-900">Login</h2>
+          <p className="text-center">Login with Google:</p>
+          <GoogleLogin
+            onSuccess={handleGoogleLogin}
+            onError={() => setMessage('Google Login failed. Please try again.')}
+            useOneTap
+          />
+          {message && <p className="text-center text-red-600 mt-4">{message}</p>}
+        </div>
       </div>
-    </div>
+    </GoogleOAuthProvider>
   );
-};
+}
 
-export default Login;
+export default LoginPage;
