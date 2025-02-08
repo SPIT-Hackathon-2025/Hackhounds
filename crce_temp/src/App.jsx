@@ -10,6 +10,7 @@ import Page1 from './Pages/Page1';
 import Page2 from './Pages/Page2';
 import Purchase from './Pages/Purchase';
 import {Route, Routes} from "react-router-dom";
+import Task from './Pages/Task';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
            <Route path="/signup" element={<SignUp/>} />
           <Route path="/streamlit" element={<StreamlitEmbed />} />
           <Route path="/pay" element={<RazorpayPayment />} />
+          <Route path="/tasks" element={<Task />} />
         </Route>
     </Routes>
 

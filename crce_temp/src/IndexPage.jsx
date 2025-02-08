@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-
+import Task from './Pages/Task';
+import { Link } from 'react-router-dom';
 const data = [
   { name: 'Jan', value: 400 },
   { name: 'Feb', value: 800 },
@@ -19,6 +20,11 @@ const HeroSection = () => {
       <p className="text-lg max-w-2xl mx-auto">
         Automate workflows, connect apps, and streamline your business with powerful integrations.
       </p>
+      <Link to="/tasks">
+        <button className="mt-6 px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-lg hover:bg-gray-100 mr-4">
+          Manage Tasks
+        </button>
+      </Link>
       <button className="mt-6 px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-lg hover:bg-gray-100">
         Get Started
       </button>
