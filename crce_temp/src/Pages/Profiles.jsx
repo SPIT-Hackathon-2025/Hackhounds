@@ -65,7 +65,46 @@ const StatBubble = ({ icon: Icon, value, label, color, index }) => (
   </div>
 );
 
-const WorkflowCard = ({ workflow, colorIndex }) => {
+const SellModal = ({ workflow, onClose, onSell }) => {
+  const [price, setPrice] = useState("");
+
+  const handleSell = () => {
+    onSell(workflow, price);
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h2 className="text-xl font-semibold mb-4">Sell Workflow</h2>
+        <p className="mb-4">Enter the price for the workflow:</p>
+        <input
+          type="number"
+          className="w-full p-2 border border-gray-300 rounded mb-4"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          placeholder="Price"
+        />
+        <div className="flex justify-end gap-4">
+          <button 
+            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition-colors"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+          <button 
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+            onClick={handleSell}
+          >
+            Sell
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const WorkflowCard = ({ workflow, colorIndex, onSell }) => {
   const color = getRandomColor(colorIndex);
   const lightColor = color.replace('500', '100');
   const darkColor = color.replace('bg-', 'border-');
@@ -94,8 +133,7 @@ const WorkflowCard = ({ workflow, colorIndex }) => {
   const Icon = getNodeIcon(getPrimaryNodeType(workflow));
 
   return (
-    <Link
-      to={`/workflow/${workflow._id}`}
+    <div
       className={`block p-6 rounded-lg border-l-4 bg-white shadow-lg hover:shadow-xl 
       transition-all duration-300 ${lightColor} ${darkColor} 
       animate-slide-up hover:scale-102 hover:-translate-y-1`}
@@ -135,14 +173,21 @@ const WorkflowCard = ({ workflow, colorIndex }) => {
           </div>
         )}
       </div>
-    </Link>
+      <button 
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+        onClick={() => onSell(workflow)}
+      >
+        Sell
+      </button>
+    </div>
   );
 };
 
 const Dashboard = () => {
   const [workflows, setWorkflows] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  
+  const [selectedWorkflow, setSelectedWorkflow] = useState(null);
+
   const fetchWorkflows = async () => {
     try {
       const response = await axios.get('http://localhost:3000/get-workflows');
@@ -157,6 +202,19 @@ const Dashboard = () => {
   useEffect(() => {
     fetchWorkflows();
   }, []);
+
+  const handleSell = (workflow) => {
+    setSelectedWorkflow(workflow);
+  };
+
+  const handleSellConfirm = async (workflow, price) => {
+    try {
+      await axios.post('http://localhost:3000/sell-workflow', { workflowId: workflow._id, price });
+      alert('Workflow sold successfully!');
+    } catch (error) {
+      console.error('Failed to sell workflow', error);
+    }
+  };
 
   const totalNodes = workflows.reduce((acc, workflow) => {
     return acc + 
@@ -250,11 +308,19 @@ const Dashboard = () => {
                 key={workflow._id} 
                 workflow={workflow} 
                 colorIndex={index}
+                onSell={handleSell}
               />
             ))}
           </div>
         </div>
       </div>
+      {selectedWorkflow && (
+        <SellModal 
+          workflow={selectedWorkflow} 
+          onClose={() => setSelectedWorkflow(null)} 
+          onSell={handleSellConfirm} 
+        />
+      )}
     </div>
   );
 };
