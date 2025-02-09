@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Mail, Paperclip, Send } from 'lucide-react';
 import axios from 'axios';
+import Papa from 'papaparse';
 
 const EmailForm = () => {
   const [formData, setFormData] = useState({
     from: '',
-    to: '',
     subject: '',
     message: ''
   });
   const [attachment, setAttachment] = useState(null);
+  const [csvFile, setCsvFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e) => {
@@ -26,31 +27,51 @@ const EmailForm = () => {
     }
   };
 
+  const handleCsvChange = (e) => {
+    if (e.target.files[0]) {
+      setCsvFile(e.target.files[0]);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const formDataToSend = new FormData();
-    formDataToSend.append('from', formData.from);
-    formDataToSend.append('to', formData.to);
-    formDataToSend.append('subject', formData.subject);
-    formDataToSend.append('message', formData.message);
-    if (attachment) {
-      formDataToSend.append('attachment', attachment);
+    if (!csvFile) {
+      alert('Please upload a CSV file with email addresses.');
+      setIsSubmitting(false);
+      return;
     }
 
-    try {
-      const response = await axios.post('http://localhost:3000/submit-email', formDataToSend, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+    Papa.parse(csvFile, {
+      complete: async (results) => {
+        const emailAddresses = results.data.flat();
+
+        for (const email of emailAddresses) {
+          const formDataToSend = new FormData();
+          formDataToSend.append('from', formData.from);
+          formDataToSend.append('to', email);
+          formDataToSend.append('subject', formData.subject);
+          formDataToSend.append('message', formData.message);
+          if (attachment) {
+            formDataToSend.append('attachment', attachment);
+          }
+
+          try {
+            const response = await axios.post('http://localhost:3000/submit-email', formDataToSend, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            });
+            console.log('Email sent to:', email, response.data);
+          } catch (error) {
+            console.error('Error sending email to:', email, error);
+          }
         }
-      });
-      console.log('Form submitted:', response.data);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
 
-    setIsSubmitting(false);
+        setIsSubmitting(false);
+      }
+    });
   };
 
   return (
@@ -80,15 +101,13 @@ const EmailForm = () => {
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                To Email
+                To Email CSV
               </label>
               <input
-                type="email"
-                name="to"
-                value={formData.to}
-                onChange={handleInputChange}
+                type="file"
+                accept=".csv"
+                onChange={handleCsvChange}
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="recipient@email.com"
                 required
               />
             </div>
