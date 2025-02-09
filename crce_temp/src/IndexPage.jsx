@@ -79,11 +79,50 @@ const DataAnalyticsSection = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-6 text-center">
-      <p>&copy; 2025 FlowSync. All rights reserved.</p>
+    <footer className="bg-gray-900 text-gray-300 py-8">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <h3 className="text-white font-semibold mb-3">Company</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="hover:text-white">About</a></li>
+              <li><a href="#" className="hover:text-white">Contact</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-white font-semibold mb-3">Product</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="hover:text-white">Features</a></li>
+              <li><a href="#" className="hover:text-white">Pricing</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-white font-semibold mb-3">Resources</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="hover:text-white">Blog</a></li>
+              <li><a href="#" className="hover:text-white">Documentation</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-white font-semibold mb-3">Legal</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="hover:text-white">Privacy</a></li>
+              <li><a href="#" className="hover:text-white">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div className="mt-8 pt-4 border-t border-gray-800 text-sm text-center">
+          © 2024 FlowSync. All rights reserved.
+        </div>
+      </div>
     </footer>
   );
 };
+
 
 const IndexPage = () => {
   return (
