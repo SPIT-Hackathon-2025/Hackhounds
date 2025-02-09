@@ -104,7 +104,43 @@ const SellModal = ({ workflow, onClose, onSell }) => {
   );
 };
 
-const WorkflowCard = ({ workflow, colorIndex, onSell }) => {
+const ShareModal = ({ workflow, onClose, onShare }) => {
+  const handleShare = () => {
+    onShare(workflow);
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h2 className="text-xl font-semibold mb-4">Share Workflow</h2>
+        <p className="mb-4">Share this workflow with the following recipients:</p>
+        <ul className="mb-4">
+          <li>hrishikesh.dalal22@spit.ac.in</li>
+          <li>venisha.kalola22@spit.ac.in</li>
+          <li>maureen.miranda22@spit.ac.in</li>
+          <li>ayushi.japsare23@spit.ac.in</li>
+        </ul>
+        <div className="flex justify-end gap-4">
+          <button 
+            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition-colors"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+          <button 
+            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+            onClick={handleShare}
+          >
+            Share
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const WorkflowCard = ({ workflow, colorIndex, onSell, onShare }) => {
   const color = getRandomColor(colorIndex);
   const lightColor = color.replace('500', '100');
   const darkColor = color.replace('bg-', 'border-');
@@ -133,53 +169,69 @@ const WorkflowCard = ({ workflow, colorIndex, onSell }) => {
   const Icon = getNodeIcon(getPrimaryNodeType(workflow));
 
   return (
-    <div
-      className={`block p-6 rounded-lg border-l-4 bg-white shadow-lg hover:shadow-xl 
-      transition-all duration-300 ${lightColor} ${darkColor} 
-      animate-slide-up hover:scale-102 hover:-translate-y-1`}
-      style={{ 
-        animationDelay: `${colorIndex * 100}ms`,
-        opacity: 0,
-        animation: `slide-up 0.5s ease-out ${colorIndex * 100}ms forwards`
-      }}
-    >
-      <div className="flex justify-between items-start mb-4">
-        <div className="flex items-center">
-          <Icon className={`w-5 h-5 mr-2 ${darkColor.replace('border-', 'text-')} animate-bounce-subtle`} />
-          <h2 className="text-lg font-semibold">Workflow {workflow._id.slice(-6)}</h2>
-        </div>
-        <ChevronRight className="w-5 h-5 text-gray-400 group-hover:translate-x-1 transition-transform duration-300" />
-      </div>
-      
-      <div className="space-y-3">
-        {workflow.trigger && (
-          <div className="text-sm animate-fade-in" style={{ animationDelay: '200ms' }}>
-            <span className="font-medium">Trigger:</span> Webhook
-          </div>
-        )}
-        {workflow.calendar?.length > 0 && (
-          <div className="text-sm animate-fade-in" style={{ animationDelay: '300ms' }}>
-            <span className="font-medium">Calendar Events:</span> {workflow.calendar.length}
-          </div>
-        )}
-        {workflow.mail?.length > 0 && (
-          <div className="text-sm animate-fade-in" style={{ animationDelay: '400ms' }}>
-            <span className="font-medium">Email Tasks:</span> {workflow.mail.length}
-          </div>
-        )}
-        {workflow.slack?.length > 0 && (
-          <div className="text-sm animate-fade-in" style={{ animationDelay: '500ms' }}>
-            <span className="font-medium">Slack Messages:</span> {workflow.slack.length}
-          </div>
-        )}
-      </div>
-      <button 
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-        onClick={() => onSell(workflow)}
+    <Link to={`/workflow/${workflow._id}`} className="block">
+      <div
+        className={`p-6 rounded-lg border-l-4 bg-white shadow-lg hover:shadow-xl 
+        transition-all duration-300 ${lightColor} ${darkColor} 
+        animate-slide-up hover:scale-102 hover:-translate-y-1`}
+        style={{ 
+          animationDelay: `${colorIndex * 100}ms`,
+          opacity: 0,
+          animation: `slide-up 0.5s ease-out ${colorIndex * 100}ms forwards`
+        }}
       >
-        Sell
-      </button>
-    </div>
+        <div className="flex justify-between items-start mb-4">
+          <div className="flex items-center">
+            <Icon className={`w-5 h-5 mr-2 ${darkColor.replace('border-', 'text-')} animate-bounce-subtle`} />
+            <h2 className="text-lg font-semibold">Workflow {workflow._id.slice(-6)}</h2>
+          </div>
+          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:translate-x-1 transition-transform duration-300" />
+        </div>
+        
+        <div className="space-y-3">
+          {workflow.trigger && (
+            <div className="text-sm animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <span className="font-medium">Trigger:</span> Webhook
+            </div>
+          )}
+          {workflow.calendar?.length > 0 && (
+            <div className="text-sm animate-fade-in" style={{ animationDelay: '300ms' }}>
+              <span className="font-medium">Calendar Events:</span> {workflow.calendar.length}
+            </div>
+          )}
+          {workflow.mail?.length > 0 && (
+            <div className="text-sm animate-fade-in" style={{ animationDelay: '400ms' }}>
+              <span className="font-medium">Email Tasks:</span> {workflow.mail.length}
+            </div>
+          )}
+          {workflow.slack?.length > 0 && (
+            <div className="text-sm animate-fade-in" style={{ animationDelay: '500ms' }}>
+              <span className="font-medium">Slack Messages:</span> {workflow.slack.length}
+            </div>
+          )}
+        </div>
+        <div className="flex gap-2">
+          <button 
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSell(workflow);
+            }}
+          >
+            Sell
+          </button>
+          <button 
+            className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              onShare(workflow);
+            }}
+          >
+            Share
+          </button>
+        </div>
+      </div>
+    </Link>
   );
 };
 
@@ -187,6 +239,7 @@ const Dashboard = () => {
   const [workflows, setWorkflows] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedWorkflow, setSelectedWorkflow] = useState(null);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const fetchWorkflows = async () => {
     try {
@@ -207,12 +260,40 @@ const Dashboard = () => {
     setSelectedWorkflow(workflow);
   };
 
+  const handleShare = (workflow) => {
+    setSelectedWorkflow(workflow);
+    setIsShareModalOpen(true);
+  };
+
   const handleSellConfirm = async (workflow, price) => {
     try {
       await axios.post('http://localhost:3000/sell-workflow', { workflowId: workflow._id, price });
       alert('Workflow sold successfully!');
     } catch (error) {
       console.error('Failed to sell workflow', error);
+    }
+  };
+
+  const handleShareConfirm = async (workflow) => {
+    const recipients = [
+      'hrishikesh.dalal22@spit.ac.in',
+      'venisha.kalola22@spit.ac.in',
+      'maureen.miranda22@spit.ac.in',
+      'ayushi.japsare23@spit.ac.in'
+    ];
+
+    try {
+      for (const recipient of recipients) {
+        await axios.post('http://localhost:3000/send-email', {
+          from: 'dcmaureenmiranda@gmail.com',
+          to: recipient,
+          subject: 'Shared Workflow',
+          message: `You have been shared a workflow. Click the link below to view the workflow: http://localhost:5173/workflow/${workflow._id}`,
+        });
+      }
+      alert('Workflow shared successfully!');
+    } catch (error) {
+      console.error('Failed to share workflow', error);
     }
   };
 
@@ -309,6 +390,7 @@ const Dashboard = () => {
                 workflow={workflow} 
                 colorIndex={index}
                 onSell={handleSell}
+                onShare={handleShare}
               />
             ))}
           </div>
@@ -319,6 +401,13 @@ const Dashboard = () => {
           workflow={selectedWorkflow} 
           onClose={() => setSelectedWorkflow(null)} 
           onSell={handleSellConfirm} 
+        />
+      )}
+      {isShareModalOpen && (
+        <ShareModal 
+          workflow={selectedWorkflow} 
+          onClose={() => setIsShareModalOpen(false)} 
+          onShare={handleShareConfirm} 
         />
       )}
     </div>
