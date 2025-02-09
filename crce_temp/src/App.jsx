@@ -17,7 +17,7 @@ import EmailForm from './Pages/Email';
 import Task from './Pages/Task';
 import TemplateDashboard from './Pages/Template';
 import NotesApp from './Pages/Notes';
-
+import Query from './Pages/Query';
 function App() {
   return (
     <Routes>
