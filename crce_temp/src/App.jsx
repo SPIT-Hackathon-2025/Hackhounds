@@ -39,7 +39,7 @@ function App() {
           <Route path="/email" element={<EmailForm/>} />
           <Route path="*" element={<h1>Not Found</h1>} />
           <Route path="/tasks" element={<Task />} />
-          <Route path="/query" element={<Query />} />
+          <Route path="/ai-prompt" element={<Query />} />
         </Route>
     </Routes>
 
