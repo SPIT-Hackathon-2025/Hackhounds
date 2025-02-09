@@ -14,16 +14,25 @@ const data = [
 
 const HeroSection = () => {
   return (
-    <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 px-6 text-center">
-      <h1 className="text-7xl font-bold mb-10">FlowSync</h1>
-      <h1 className="text-5xl font-bold mb-4">Build, Automate, and Innovate</h1>
-      <p className="text-lg max-w-2xl mx-auto">
-        Automate workflows, connect apps, and streamline your business with powerful integrations.
-      </p>
-      <button className="mt-6 px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-lg hover:bg-gray-100">
-        Get Started
-      </button>
-    </section>
+    <section
+  className="relative bg-[url('https://media.licdn.com/dms/image/v2/D4D12AQGFVdJXC4G8RA/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1704723721334?e=2147483647&v=beta&t=G9pAZ-m1afnK8b_t0jr1DPfBKJwM6P9qrfS9Df-tyKY')] bg-cover bg-center text-white py-20 px-6 text-center"
+>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-b from-gray-700/30 to-gray-900/70"></div>
+
+  {/* Content */}
+  <div className="relative z-10">
+    <h1 className="text-7xl font-bold mb-10 ">FlowSync</h1>
+    <h1 className="text-5xl font-bold mb-4">Build, Automate, and Innovate</h1>
+    <p className="text-lg max-w-2xl mx-auto">
+      Automate workflows, connect apps, and streamline your business with powerful integrations.
+    </p>
+    <button className="mt-6 px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-lg hover:bg-gray-100">
+      Get Started
+    </button>
+  </div>
+</section>
+
   );
 };
 
