@@ -58,7 +58,7 @@ const WorkflowCard = ({ workflow, colorIndex, imagePath }) => {
         <div className={`absolute inset-0 bg-gradient-to-t from-violet-500/20 to-transparent 
                         transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
         <img 
-          src={imagePath || "/src/assets/logo.png"} 
+          src={imagePath || "/src/image/image.png"} 
           alt="Template preview" 
           className={`w-full h-full object-cover transition-transform duration-700
                      ${isHovered ? 'scale-110' : 'scale-100'}`}
@@ -151,7 +151,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-100">
       <div className="bg-gradient-to-b from-violet-500/5 to-transparent pt-12 pb-24">
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex justify-between items-center mb-8">
