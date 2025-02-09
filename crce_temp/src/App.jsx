@@ -15,7 +15,8 @@ import {Route, Routes} from "react-router-dom";
 import FileUpload from './Pages/Drive';
 import EmailForm from './Pages/Email';
 import Task from './Pages/Task';
-import Query from './Pages/Query';
+import TemplateDashboard from './Pages/Template';
+import NotesApp from './Pages/Notes';
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
           <Route path="/profile" element={<Profiles/>}/>
           <Route path="/workflow/:id" element={<WorkFlowMaker />} />
            <Route path="/login" element={<Login/>} />
+           <Route path="/notes" element={<NotesApp/>} />
+
+           <Route path="/template" element={<TemplateDashboard/>} />
            <Route path="/signup" element={<SignUp/>} />
           <Route path="/streamlit" element={<StreamlitEmbed />} />
           <Route path="/pay" element={<RazorpayPayment />} />

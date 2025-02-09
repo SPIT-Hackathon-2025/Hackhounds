@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { 
-  Send, 
   Workflow, 
   LayoutTemplate, 
   CreditCard, 
@@ -12,15 +11,15 @@ import {
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-      <div className="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
+    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100">
+      <div className="flex justify-between items-center py-4 px-6">
         {/* Logo */}
         <Link 
           to={'/'} 
           className="flex items-center gap-2 transition-transform hover:scale-105"
         >
           <img src="../src/assets/logo.png" alt="Logo" className="w-8 h-8" />
-          <span className="font-bold text-2 xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <span className="font-bold text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             FlowSync
           </span>
         </Link>
