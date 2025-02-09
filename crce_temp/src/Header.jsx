@@ -6,7 +6,8 @@ import {
   CreditCard, 
   Sparkles,
   Menu,
-  User
+  User,
+  ClipboardList
 } from "lucide-react";
 
 export default function Header() {
@@ -54,6 +55,14 @@ export default function Header() {
           >
             <CreditCard className="w-4 h-4" />
             <span>Purchase</span>
+          </Link>
+
+          <Link 
+            to="/tasks" 
+            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            <ClipboardList className="w-4 h-4" />
+            <span>Manage Tasks</span>
           </Link>
           
           <Link 
