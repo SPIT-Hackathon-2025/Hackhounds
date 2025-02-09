@@ -145,20 +145,12 @@ const Sidebar = () => (
     <SidebarItem
       label="Mail to Participants"
       type="custom"
-      inputs={[
-        { label: "To (CSV)", placeholder: "Upload CSV file", name: "toCsv", type: "file" },
-        { label: "Email Subject", placeholder: "Enter subject", name: "subject" },
-        { label: "Message", placeholder: "Enter message", name: "message" },
-        { label: "Attachment (PDF)", placeholder: "Upload PDF", name: "attachment", type: "file" },
-      ]}
+      inputs={[]} // Remove input fields
     />
     <SidebarItem
       label="Upload File to Drive"
       type="custom"
-      inputs={[
-        { label: "File Path", placeholder: "Select file", name: "filePath", type: "file" },
-        { label: "Drive Folder", placeholder: "Enter folder path", name: "folder" },
-      ]}
+      inputs={[]} // Remove input fields
     />
     <SidebarItem
       label="Send Message on Slack"
@@ -284,11 +276,11 @@ const Flowchart = () => {
         order: node.order,
       })),
       mail: orderedNodes.filter(node => node.data.label === 'Mail to Participants').map(node => ({
-        subject: node.data.values.subject || '',
-        message: node.data.values.message || '',
-        description: node.data.values.description || '',
-        attachment: node.data.values.attachment || '',
-        csvFile: node.data.values.csvFile || '',
+        subject: 'Default Subject',
+        message: 'Default Message',
+        description: 'Default Description',
+        attachment: 'default.pdf',
+        csvFile: 'default.csv',
         order: node.order,
       })),
       slack: orderedNodes.filter(node => node.data.label === 'Send Message on Slack').map(node => ({
