@@ -657,5 +657,38 @@ app.post('/api/save-workflow', async (req, res) => {
   }
 });
 
+app.post('/emailset', async (req, res) => {
+  const { subject, from, snippet } = req.body;
+
+  if (!subject || !from || !snippet) {
+    return res.status(400).send({ error: 'Missing required fields' });
+  }
+
+  try {
+    // Create a transporter object using SMTP transport
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'dcmaureenmiranda@gmail.com', // Replace with your email
+         pass:'dqnr qfzl nzmv eonz'
+      }
+    });
+
+    // Set up email data
+    const mailOptions = {
+      from: 'dcmaureenmiranda@gmail.com', // Replace with your email
+      to: from,
+      subject: `Re: ${subject}`,
+      text: `You sent: ${snippet}`
+    };
+    await transporter.sendMail(mailOptions);
+
+    console.log('Email sent successfully');
+    res.send({ message: 'Email sent successfully' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).send({ error: 'Failed to send email' });
+  }
+});
 
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
