@@ -20,6 +20,7 @@ const readline = require("readline");
 const schedule = require("node-schedule");
 const Email = require('./models/Email'); // Import the Email model
 app.use(cors({ origin: '*', credentials: true }));
+const Note = require('./models/Notes');
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -35,6 +36,38 @@ app.use(passport.initialize());
 app.use(passport.session());
 const path=require('path');
 const nodemailer = require('nodemailer');
+
+// Save or update note in database
+app.post("/notes", async (req, res) => {
+  try {
+    const { username, header, text } = req.body;
+    let note = await Note.findOne({ username, header });
+
+    if (note) {
+      note.text = text;
+      note.createdAt = new Date();
+    } else {
+      note = new Note({ username, header, text });
+    }
+
+    await note.save();
+    res.status(200).json({ message: "Note saved successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Error saving note" });
+  }
+});
+
+// get notes for a user
+app.get("/notes-find", async (req, res) => {
+  try {
+    const { username } = req.query;
+    const notes = await Note.find({ username });
+    res.status(200).json(notes);
+  } catch (error) { 
+    res.status(500).json({ error: "Error fetching notes" });
+  }
+});
+
 // Google OAuth strategy
 passport.use(
   new GoogleStrategy(
