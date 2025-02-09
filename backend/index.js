@@ -613,6 +613,16 @@ app.post('/submit-email', upload.single('attachment'), async (req, res) => {
     res.status(500).json({ error: 'Failed to save email details.' });
   }
 });
+app.post('/api/save-workflow', async (req, res) => {
+  try {
+    const workflow = new Workflow(req.body);
+    await workflow.save();
+    res.status(201).json({ message: 'Workflow saved successfully!', insertedId: workflow._id });
+  } catch (error) {
+    console.error('Error saving workflow:', error);
+    res.status(500).json({ error: 'Failed to save workflow.' });
+  }
+});
 
 
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));

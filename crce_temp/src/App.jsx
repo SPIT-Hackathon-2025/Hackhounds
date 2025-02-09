@@ -15,6 +15,7 @@ import {Route, Routes} from "react-router-dom";
 import FileUpload from './Pages/Drive';
 import EmailForm from './Pages/Email';
 import Task from './Pages/Task';
+import Query from './Pages/Query';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/email" element={<EmailForm/>} />
           <Route path="*" element={<h1>Not Found</h1>} />
           <Route path="/tasks" element={<Task />} />
+          <Route path="/query" element={<Query />} />
         </Route>
     </Routes>
 
